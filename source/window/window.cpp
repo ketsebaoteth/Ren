@@ -256,7 +256,7 @@ void Dispatch_Event(MSG msg)
   DispatchMessage(&msg);
 }
 
-void RunEventLoop(Window_Instance window_instance, GPU_Context ctx, std::function<void(MSG)> callback)
+void RunEventLoop(Window_Instance window_instance, GPU_Context ctx, std::function<int(MSG)> callback)
 {
   MSG msg;
   while (GetMessage(&msg, NULL, 0, 0))

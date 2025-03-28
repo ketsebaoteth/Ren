@@ -81,4 +81,4 @@ MSG Get_Events(Window_Instance window_instance);
 
 void Dispatch_Event(MSG msg);
 
-void RunEventLoop(Window_Instance instance, GPU_Context ctx, std::function<void(MSG)> callback);
+void RunEventLoop(Window_Instance instance, GPU_Context ctx, std::function<int(MSG)> callback);

@@ -12,6 +12,6 @@ int main()
 
   GPU_Context ctx = Setup_Gpu_Context(instance);
 
-  RunEventLoop(instance, ctx, [](MSG event)
+  RunEventLoop(instance, ctx, [](MSG event) -> int
                {if(event.message == WM_QUIT) return 0; });
 };
