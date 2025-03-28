@@ -1,27 +1,17 @@
-#include <iostream>
 #include "window/define_window.h"
 
 int main()
 {
   Window window;
-  Window_Handle window_handle = Create_Window(window);
+  window.title = "custom title is working";
+  window.x = 50;
+  window.y = 50;
+  Window_Instance instance = Create_Window(window);
 
-  CHECK_HANDLE(window_handle.handle);
+  VERIFY_HANDLE(instance);
 
-  GPU_Context ctx = Setup_Gpu_Context(window_handle.handle);
-  while (true)
-  {
-    MSG msg = {};
-    if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
-    {
-      if (msg.message == WM_QUIT)
-        break;
-      TranslateMessage(&msg);
-      DispatchMessage(&msg);
-    }
+  GPU_Context ctx = Setup_Gpu_Context(instance);
 
-    // clear window
-    Clear_Window(ctx, {0.2f, 0.4f, 0.5f, 1.0f});
-  }
-  return 0;
-}
+  RunEventLoop(instance, ctx, [](MSG event)
+               {if(event.message == WM_QUIT) return 0; });
+};
